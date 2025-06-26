@@ -22,8 +22,8 @@ for file in "$DIR"/*; do
         echo "📄 Processing file: $file" | tee -a "$OUT_FILE"
 
         total_lines=$(wc -l < "$file")
-        write_lines=$(grep -c 'Write' "$file")
-        read_lines=$(grep -c 'Read' "$file")
+        write_lines=$(grep -i -c 'Write' "$file")
+        read_lines=$(grep -i -c 'Read' "$file")
 
         write_percent=$(awk -v w=$write_lines -v t=$total_lines 'BEGIN { if (t==0) print 0; else printf "%.2f", (w/t)*100 }')
         read_percent=$(awk -v r=$read_lines -v t=$total_lines 'BEGIN { if (t==0) print 0; else printf "%.2f", (r/t)*100 }')
