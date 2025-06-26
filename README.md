@@ -1,8 +1,13 @@
 # WorkloadRWStat
 
-**WorkloadRWStat** is a lightweight Bash-based CLI tool for analyzing text-based workload trace files. It scans each file in a given directory, counts the number of lines containing the keywords `Read` and `Write`, and reports their percentages relative to total lines.
+> **Fast insights into I/O behavior of real-world workloads**
 
-This tool is designed to help system architects, researchers, and performance engineers gain quick insights into I/O behavior patterns within **any kind of workload trace**, such as database benchmarks, virtual desktop infrastructure logs, synthetic I/O generators, and more.
+---
+
+**WorkloadRWStat** is a lightweight Bash-based CLI tool for analyzing text-based workload trace files.  
+It scans each file in a given directory, counts the number of lines containing `Read` and `Write`, and reports their percentages relative to total lines.
+
+This tool is designed to help system architects, researchers, and performance engineers gain quick insights into I/O behavior patterns within **any kind of workload trace**, such as database benchmarks, virtualization logs, synthetic I/O generators, and more.
 
 ---
 
@@ -17,37 +22,41 @@ This tool is designed to help system architects, researchers, and performance en
 - 🕒 Logs start and end timestamps
 - ⏱️ Displays total duration of the analysis
 - 🧾 Appends results to an output file (`output_analyze_rw`) without overwriting existing data
-- 🔧 Implemented in pure Bash using standard Unix tools (`grep`, `awk`, `wc`, `date`)
+- 🔧 Implemented in pure Bash using standard Unix tools (`grep`, `awk`, `wc`, `date`, `tee`)
 
 ---
 
 ## 🚀 How to Use
 
-### 1. Clone the repository:
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/YOUR_USERNAME/WorkloadRWStat.git
 cd WorkloadRWStat
-2. Make the script executable:
-bash
-Copy
-Edit
+```
+
+### 2. Make the script executable
+
+```bash
 chmod +x analyze_rw.sh
-3. Run the script:
-bash
-Copy
-Edit
+```
+
+### 3. Run the script
+
+```bash
 ./analyze_rw.sh /path/to/your/workload/files
-If no path is provided, the script defaults to the current directory.
+```
 
-Only regular files (not subdirectories or symlinks) are analyzed.
+> If no path is provided, the script defaults to the current directory.  
+> Only regular files (not subdirectories or symlinks) are analyzed.
 
-📤 Sample Output
-Both on-screen and in the output_analyze_rw file, you’ll see output like this:
+---
 
-yaml
-Copy
-Edit
+## 📤 Sample Output
+
+On screen and in the `output_analyze_rw` file:
+
+```
 =======================
 🔰 Start time: 2025-06-26 14:00:01
 Target directory: ./my_workloads
@@ -67,49 +76,67 @@ Target directory: ./my_workloads
 ✅ End time: 2025-06-26 14:00:08
 ⏱️ Duration: 7 seconds
 =======================
-🧪 Use Cases
-WorkloadRWStat is not limited to any specific workload type. It works with:
+```
 
-Database traces (e.g., TPC-C, YCSB, RocksDB logs)
+---
 
-Storage benchmarks (e.g., FIO, Filebench, vdbench)
+## 🧪 Use Cases
 
-Virtualization logs (e.g., VDI workload traces)
+WorkloadRWStat works with any workload trace file, such as:
 
-Custom or synthetic workload generators
+- 📦 Database benchmarks: `TPC-C`, `YCSB`, `RocksDB logs`
+- 💾 Storage workloads: `FIO`, `Filebench`, `vdbench`
+- 🖥️ VDI workload logs and virtualization traces
+- 🔬 Custom or synthetic workloads used in research or simulation
+- 📁 Any structured or unstructured text file containing `Read` and `Write` operations
 
-Any structured or unstructured text file where Read and Write operations appear line-by-line
+---
 
-⚙️ How It Works
-The script uses:
+## ⚙️ How It Works
 
-grep to count the number of lines containing the keywords Read and Write
+Internally, the script uses:
 
-awk to calculate percentages with floating-point precision
+- `grep` to count lines with `Read` and `Write`
+- `awk` to calculate percentages
+- `wc -l` to count total lines
+- `date` to measure time
+- `tee` to log output both to terminal and file
 
-wc -l to determine total line count
+---
 
-date to record timing
+## 📁 File Structure
 
-tee to write to both terminal and output file simultaneously
-
-📁 File Structure
-text
-Copy
-Edit
+```text
 WorkloadRWStat/
-├── analyze_rw.sh       # Main script
-└── README.md           # This documentation
-🔒 License
-MIT License — feel free to use, modify, and redistribute.
+├── analyze_rw.sh       # Main analysis script
+└── README.md           # Documentation file
+```
 
-🤝 Contributing
-Contributions are welcome! If you have suggestions, bug reports, or feature requests, please open an issue or submit a pull request.
+---
 
-📬 Contact
-If you'd like to contribute, report issues, or further develop WorkloadRWStat, I’d be happy to hear from you!
+## 🔒 License
 
-Masoud Khanalizadeh Imani
+This project is licensed under the **MIT License**.  
+Feel free to use, modify, and redistribute for personal or commercial purposes.
+
+---
+
+## 📬 Contact
+
+If you'd like to contribute, report issues, or further develop **WorkloadRWStat**, I’d be happy to hear from you!
+
+**Masoud Khanalizadeh Imani**  
 📧 masoud.khanalizadehimani@gmail.com
 
-Feel free to reach out with ideas, suggestions, or collaborations.
+---
+
+## ⭐️ Contributing
+
+Pull requests are welcome!  
+If you have suggestions for improvements or want to extend functionality (e.g., support for custom keywords, CSV output, etc.), please open an issue or a PR.
+
+---
+
+## 🔗 GitHub Repository Description
+
+> Bash tool for analyzing Read/Write operations in real workload trace files.
